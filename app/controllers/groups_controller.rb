@@ -4,14 +4,16 @@ class GroupsController < ApplicationController
   end
 
   def new
-    @groups = Group.new
+    @group = Group.new
   end
 
   def create
-    @groups = Group.new(group_params)
-    @groups.save
-
-    redirect_to groups_path
+    @group = Group.new(group_params)
+    if @group.save
+      redirect_to groups_path
+    else
+      render :new
+    end
   end
 
   def show
